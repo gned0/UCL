@@ -6,7 +6,7 @@ Pillow==8.3.2
 pyparsing==2.4.7
 python-dateutil==2.8.2
 PyYAML==5.4.1
-quadprog==0.1.10
+quadprog==0.1.11
 six==1.16.0
 torch==1.9.1
 torchvision==0.10.1
