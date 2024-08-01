@@ -1,3 +1,5 @@
+Fork with updated requirements and Dockerfile to run containerized experiments.
+
 # Representational Continuity </br> for Unsupervised Continual Learning
 This is the *Pytorch Implementation* for the paper Representational Continuity for Unsupervised Continual Learning
 
