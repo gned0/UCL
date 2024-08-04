@@ -63,7 +63,7 @@ def knn_predict(feature, feature_bank, feature_labels, classes, knn_k, knn_t):
     # counts for each class
     one_hot_label = torch.zeros(feature.size(0) * knn_k, classes, device=sim_labels.device)
     # [B*K, C]
-    one_hot_label = one_hot_label.scatter(dim=-1, index=sim_labels.view(-1, 1), value=1.0)
+    one_hot_label = one_hot_label.scatter(dim=-1, index=sim_labels.view(-1, 1).long(), value=1.0)
     # weighted score ---> [B, C]
     pred_scores = torch.sum(one_hot_label.view(feature.size(0), -1, classes) * sim_weight.unsqueeze(dim=-1), dim=1)
 
