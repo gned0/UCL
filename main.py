@@ -56,6 +56,18 @@ def evaluate(model: ContinualModel, dataset: ContinualDataset, device, classifie
 
 
 def main(device, args):
+
+    print(torch.__version__)
+    print(torch.version.cuda)
+    print(torch.backends.cudnn.version())
+
+    if torch.cuda.is_available():
+    	device = torch.device("cuda")
+    	print(f"GPU available: {torch.cuda.get_device_name(device)}")
+    else:
+    	print("No GPU available")
+    torch.cuda.empty_cache()
+
     dataset = get_dataset(args)
     dataset_copy = get_dataset(args)
     train_loader, memory_loader, test_loader = dataset_copy.get_data_loaders(args)
@@ -67,7 +79,7 @@ def main(device, args):
     # define model
     model = get_model(args, device, len(train_loader), dataset.get_transform(args))
 
-    logger = Logger(matplotlib=args.logger.matplotlib, log_dir=args.log_dir)
+    #logger = Logger(matplotlib=args.logger.matplotlib, log_dir=args.log_dir)
     accuracy = 0 
     
     train_loaders, memory_loaders, test_loaders = [], [], []
@@ -95,9 +107,9 @@ def main(device, args):
         local_progress=tqdm(train_loaders[t], desc=f'Epoch {epoch}/{args.train.num_epochs}', disable=args.hide_progress)
         for idx, ((images1, images2, notaug_images), labels) in enumerate(local_progress):
             data_dict = model.observe(images1, labels, images2, notaug_images)
-            logger.update_scalers(data_dict)
+            # logger.update_scalers(data_dict)
 
-        global_progress.set_postfix(data_dict)
+        # global_progress.set_postfix(data_dict)
 
         # if args.train.knn_monitor and epoch % args.train.knn_interval == 0: 
         if (epoch + 1) == args.train.stop_at_epoch:
