@@ -1,8 +1,8 @@
 name: simsiam-c10-experiment-resnet18
 dataset: 
-  name: seq-cifar10
+  name: seq-cifar100
   image_size: 32
-  num_workers: 4
+  num_workers: 16
 
 model: 
   name: simsiam

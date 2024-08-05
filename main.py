@@ -67,7 +67,7 @@ def main(device, args):
     else:
     	print("No GPU available")
     torch.cuda.empty_cache()
-
+    print(get_dataset(args))
     dataset = get_dataset(args)
     dataset_copy = get_dataset(args)
     train_loader, memory_loader, test_loader = dataset_copy.get_data_loaders(args)
